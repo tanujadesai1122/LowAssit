@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ case['case_title'] }} - LawAssist
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #222;
+            line-height: 1.7;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: #172033;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #d5d9e2;
+        }
+
+        /* MAIN CONTAINER */
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* CASE TITLE */
+
+        .title-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.07);
+        }
+
+        .title-card h2 {
+            color: #172033;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        /* CASE INFORMATION */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(200px, 1fr));
+
+            gap: 15px;
+        }
+
+        .info-box {
+            background: #f0f2f5;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .info-box strong {
+            display: block;
+            color: #172033;
+            margin-bottom: 5px;
+        }
+
+        /* CONTENT CARD */
+
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.07);
+        }
+
+        .content-card h2 {
+            color: #172033;
+            margin-bottom: 15px;
+        }
+
+        .case-text {
+            white-space: pre-line;
+            color: #444;
+        }
+
+        /* SUMMARY */
+
+        .summary {
+            background: #f0f2f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        /* BACK BUTTON */
+
+        .back-button {
+            display: inline-block;
+            background: #172033;
+            color: white;
+            padding: 12px 22px;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            margin-top: 10px;
+        }
+
+        .back-button:hover {
+            background: #283752;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            color: #777;
+
+            margin-top: 35px;
+            padding-bottom: 30px;
+
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .title-card h2 {
+                font-size: 22px;
+            }
+
+            .content-card {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>⚖ LawAssist</h1>
+
+        <p>
+            AI-Based Legal Case Research Assistant
+        </p>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="container">
+
+
+        <!-- CASE TITLE -->
+
+        <div class="title-card">
+
+            <h2>
+                {{ case['case_title'] }}
+            </h2>
+
+
+            <!-- CASE INFORMATION -->
+
+            <div class="info-grid">
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Case ID
+                    </strong>
+
+                    {{ case['case_id'] }}
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Category
+                    </strong>
+
+                    {{ case['category'] }}
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Court
+                    </strong>
+
+                    {{ case['court'] }}
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Year
+                    </strong>
+
+                    {{ case['year'] }}
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- CASE SUMMARY -->
+
+        <div class="content-card">
+
+            <h2>
+                📋 Case Summary
+            </h2>
+
+            <div class="summary">
+
+                {{ case['summary'] }}
+
+            </div>
+
+        </div>
+
+
+        <!-- FULL CASE -->
+
+        <div class="content-card">
+
+            <h2>
+                📖 Full Case Description
+            </h2>
+
+            <div class="case-text">
+
+                {{ case['case_text'] }}
+
+            </div>
+
+        </div>
+
+
+        <!-- BACK BUTTON -->
+
+        <a href="/" class="back-button">
+
+            ← Search Another Case
+
+        </a>
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+
+            <p>
+                LawAssist — AI-assisted legal research tool
+            </p>
+
+            <p>
+                This system is intended for
+                educational and research purposes.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

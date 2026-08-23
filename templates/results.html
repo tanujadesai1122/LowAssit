@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>LawAssist - Related Cases</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            background: #172033;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #d5d9e2;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+
+        /* =========================
+           SEARCHED CASE
+        ========================= */
+
+        .query-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.07);
+        }
+
+        .query-card h2 {
+            color: #172033;
+            margin-bottom: 15px;
+        }
+
+        .query {
+            background: #f0f2f5;
+            padding: 18px;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           RESULTS TITLE
+        ========================= */
+
+        .results-title {
+            margin-bottom: 20px;
+            color: #172033;
+        }
+
+
+        /* =========================
+           CASE CARD
+        ========================= */
+
+        .case-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.07);
+
+            transition: transform 0.2s ease;
+        }
+
+        .case-card:hover {
+            transform: translateY(-2px);
+        }
+
+
+        .case-card h3 {
+            color: #172033;
+            margin-bottom: 15px;
+            font-size: 21px;
+        }
+
+
+        /* =========================
+           CASE INFORMATION
+        ========================= */
+
+        .case-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+
+        .tag {
+            background: #eef1f6;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           SIMILARITY
+        ========================= */
+
+        .similarity {
+            background: #172033;
+            color: white;
+            padding: 8px 13px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .case-card p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+
+        /* =========================
+           VIEW FULL CASE BUTTON
+        ========================= */
+
+        .view-button {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            padding: 11px 20px;
+
+            background: #172033;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+            transition: background 0.2s ease;
+        }
+
+
+        .view-button:hover {
+            background: #283752;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-button {
+            display: inline-block;
+
+            margin-top: 10px;
+
+            padding: 12px 20px;
+
+            background: #172033;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+        }
+
+
+        .back-button:hover {
+            background: #283752;
+        }
+
+
+        /* =========================
+           NO RESULTS
+        ========================= */
+
+        .no-results {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            color: #666;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.07);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+            padding-bottom: 30px;
+        }
+
+
+        /* =========================
+           MOBILE RESPONSIVE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 25px;
+            }
+
+            .case-card {
+                padding: 20px;
+            }
+
+            .case-card h3 {
+                font-size: 19px;
+            }
+
+            .case-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <div class="header">
+
+        <h1>⚖ LawAssist</h1>
+
+        <p>
+            AI-Based Legal Case Research Assistant
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         MAIN CONTAINER
+    ========================= -->
+
+    <div class="container">
+
+
+        <!-- =========================
+             USER CASE DESCRIPTION
+        ========================= -->
+
+        <div class="query-card">
+
+            <h2>
+                Your Case Description
+            </h2>
+
+            <div class="query">
+
+                {{ query }}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             RELATED CASES
+        ========================= -->
+
+        <h2 class="results-title">
+
+            🔍 Related Legal Cases
+
+        </h2>
+
+
+
+        <!-- =========================
+             CHECK RESULTS
+        ========================= -->
+
+        {% if results %}
+
+
+            <!-- =========================
+                 DISPLAY EACH CASE
+            ========================= -->
+
+            {% for case in results %}
+
+            <div class="case-card">
+
+
+                <!-- CASE TITLE -->
+
+                <h3>
+
+                    {{ loop.index }}.
+                    {{ case.title }}
+
+                </h3>
+
+
+
+                <!-- CASE INFORMATION -->
+
+                <div class="case-info">
+
+
+                    <span class="tag">
+
+                        Category:
+                        {{ case.category }}
+
+                    </span>
+
+
+                    <span class="tag">
+
+                        Court:
+                        {{ case.court }}
+
+                    </span>
+
+
+                    <span class="tag">
+
+                        Year:
+                        {{ case.year }}
+
+                    </span>
+
+
+                    <span class="similarity">
+
+                        Similarity:
+                        {{ case.similarity }}%
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- CASE SUMMARY -->
+
+                <p>
+
+                    <strong>
+                        Summary:
+                    </strong>
+
+                    {{ case.summary }}
+
+                </p>
+
+
+
+                <!-- =========================
+                     VIEW FULL CASE BUTTON
+                ========================= -->
+
+                <a
+                    href="/case/{{ case.index }}"
+                    class="view-button">
+
+                    📖 View Full Case
+
+                </a>
+
+
+            </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <!-- =========================
+                 NO RESULTS
+            ========================= -->
+
+            <div class="no-results">
+
+                <h3>
+                    No closely related cases found.
+                </h3>
+
+                <p style="margin-top: 10px;">
+
+                    Try entering more details
+                    about your case.
+
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+
+        <!-- =========================
+             BACK TO SEARCH
+        ========================= -->
+
+        <a
+            href="/"
+            class="back-button">
+
+            ← Search Another Case
+
+        </a>
+
+
+
+        <!-- =========================
+             FOOTER
+        ========================= -->
+
+        <div class="footer">
+
+            <p>
+
+                LawAssist —
+                AI-assisted legal research tool
+
+            </p>
+
+            <p>
+
+                Results are for research purposes
+                and should not be treated as legal advice.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
